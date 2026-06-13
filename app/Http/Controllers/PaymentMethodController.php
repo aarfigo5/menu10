@@ -32,7 +32,7 @@ class PaymentMethodController extends Controller
         ]);
 
         $validated['icon'] = $validated['icon'] ?? '💳';
-        $validated['order'] = PaymentMethod::max('order') + 1;
+        $validated['order'] = (PaymentMethod::max('order') ?? 0) + 1;
 
         PaymentMethod::create($validated);
 
