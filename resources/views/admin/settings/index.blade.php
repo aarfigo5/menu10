@@ -8,7 +8,7 @@
                 <h1 class="mt-3 text-4xl font-black uppercase tracking-tight text-white">Configuración del Sistema</h1>
                 <p class="mt-4 max-w-2xl text-sm leading-relaxed text-gray-300">Gestiona la tasa de cambio USD/BS, datos de contacto y configuración general.</p>
             </div>
-            <a href="{{ route('admin.index') }}" class="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-black uppercase tracking-widest text-white transition hover:bg-blue-700">
+            <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-black uppercase tracking-widest text-white transition hover:bg-blue-700"
                 ← Volver al Dashboard
             </a>
         </div>
@@ -42,7 +42,7 @@
                         <span class="text-xs font-black uppercase tracking-widest text-gray-400">Valor del dólar en Bolívares</span>
                         <div class="mt-2 flex items-center gap-2">
                             <span class="text-lg font-black text-yellow-400">$1 USD =</span>
-                            <input name="exchange_rate" type="number" step="0.01" value="{{ old('exchange_rate', $exchangeRate) }}" class="w-40 rounded-3xl border border-yellow-600/30 bg-black/80 px-4 py-3 text-lg font-bold text-white focus:border-yellow-400 focus:outline-none" required>
+                            <input name="exchange_rate" type="number" step="0.01" value="{{ old('exchange_rate', $exchangeRate) }}" class="w-40 rounded-3xl border border-yellow-600/30 bg-black/80 px-4 py-2 text-lg font-bold text-yellow-300 focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500/30">
                             <span class="text-lg font-black text-yellow-400">BS</span>
                         </div>
                         @error('exchange_rate')
@@ -60,7 +60,7 @@
                 <div class="space-y-4">
                     <label class="block">
                         <span class="text-xs font-black uppercase tracking-widest text-gray-400">Número de WhatsApp</span>
-                        <input name="whatsapp_number" type="text" value="{{ old('whatsapp_number', $whatsappNumber) }}" class="mt-2 w-full rounded-3xl border border-green-600/30 bg-black/80 px-4 py-3 text-white focus:border-green-400 focus:outline-none" placeholder="584121234567">
+                        <input name="whatsapp_number" type="text" value="{{ old('whatsapp_number', $whatsappNumber) }}" class="mt-2 w-full rounded-3xl border border-green-600/30 bg-black/80 px-4 py-2 text-white focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500/30">
                         <p class="mt-1 text-xs text-gray-500">Ej: 584121234567 (incluir código de país)</p>
                         @error('whatsapp_number')
                             <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
@@ -69,7 +69,7 @@
 
                     <label class="block">
                         <span class="text-xs font-black uppercase tracking-widest text-gray-400">Email de Contacto</span>
-                        <input name="business_email" type="email" value="{{ old('business_email', $businessEmail) }}" class="mt-2 w-full rounded-3xl border border-green-600/30 bg-black/80 px-4 py-3 text-white focus:border-green-400 focus:outline-none" placeholder="contacto@labambucha.com">
+                        <input name="business_email" type="email" value="{{ old('business_email', $businessEmail) }}" class="mt-2 w-full rounded-3xl border border-green-600/30 bg-black/80 px-4 py-2 text-white focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500/30">
                         @error('business_email')
                             <p class="mt-1 text-sm text-red-400">{{ $message }}</p>
                         @enderror
@@ -82,7 +82,7 @@
                 <button type="submit" class="inline-flex items-center justify-center rounded-full bg-green-500 px-6 py-3 text-sm font-black uppercase tracking-widest text-black transition hover:bg-green-600">
                     ✅ Guardar Configuración
                 </button>
-                <a href="{{ route('admin.index') }}" class="inline-flex items-center justify-center rounded-full border border-blue-600/30 bg-black/70 px-6 py-3 text-sm font-black uppercase tracking-widest text-blue-300 transition hover:border-blue-600/50">
+                <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center justify-center rounded-full border border-blue-600/30 bg-black/70 px-6 py-3 text-sm font-black uppercase tracking-widest text-white transition hover:bg-black/50">
                     ← Cancelar
                 </a>
             </div>
