@@ -6,7 +6,7 @@
             <div>
                 <p class="text-xs font-black uppercase tracking-[0.3em] text-blue-400">Panel administrativo</p>
                 <h1 class="mt-3 text-4xl font-black uppercase tracking-tight text-white">Dashboard</h1>
-                <p class="mt-4 max-w-2xl text-sm leading-relaxed text-gray-300">Gestiona todos los aspectos de tu restaurante desde aquí: productos, categorías, zonas de entrega, configuración y más.</p>
+                <p class="mt-4 max-w-2xl text-sm leading-relaxed text-gray-300">Gestiona todos los aspectos de tu restaurante desde aquí: productos, categorías, zonas de entrega, configuración y[...]</p>
             </div>
             <a href="{{ route('menu') }}" class="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-black uppercase tracking-widest text-white transition hover:bg-blue-700">
                 ← Volver al menú
@@ -123,11 +123,18 @@
                         <div class="grid gap-4">
                             <label class="block">
                                 <span class="text-xs font-black uppercase tracking-widest text-gray-400">Precio USD</span>
-                                <input name="price_usd" type="number" step="0.01" value="{{ old('price_usd', $product->price_usd) }}" class="mt-2 w-full rounded-3xl border border-blue-600/30 bg-black/80 px-4 py-3 text-white focus:border-blue-400 focus:outline-none" required>
+                                <input name="price_usd" type="number" step="0.01" value="{{ old('price_usd', $product->price_usd) }}" class="mt-2 w-full rounded-3xl border border-blue-600/30 bg-black/80 px-4 py-3 text-white focus:border-blue-400 focus:outline-none price-input" required>
                             </label>
                             <label class="block">
                                 <span class="text-xs font-black uppercase tracking-widest text-gray-400">Categoría</span>
-                                <input name="category" value="{{ old('category', $product->category) }}" class="mt-2 w-full rounded-3xl border border-blue-600/30 bg-black/80 px-4 py-3 text-white focus:border-blue-400 focus:outline-none">
+                                <select name="category" class="mt-2 w-full rounded-3xl border border-blue-600/30 bg-black/80 px-4 py-3 text-white focus:border-blue-400 focus:outline-none" required>
+                                    <option value="">-- Selecciona una categoría --</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->name }}" {{ old('category', $product->category) == $category->name ? 'selected' : '' }}>
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </label>
                             <label class="block">
                                 <span class="text-xs font-black uppercase tracking-widest text-gray-400">Etiqueta</span>
@@ -181,11 +188,18 @@
                 <div class="space-y-4">
                     <label class="block">
                         <span class="text-xs font-black uppercase tracking-widest text-gray-400">Precio USD</span>
-                        <input name="price_usd" type="number" step="0.01" value="{{ old('price_usd') }}" class="mt-2 w-full rounded-3xl border border-blue-600/30 bg-black/80 px-4 py-3 text-white focus:border-blue-400 focus:outline-none" required>
+                        <input name="price_usd" type="number" step="0.01" value="{{ old('price_usd') }}" class="mt-2 w-full rounded-3xl border border-blue-600/30 bg-black/80 px-4 py-3 text-white focus:border-blue-400 focus:outline-none price-input" required>
                     </label>
                     <label class="block">
                         <span class="text-xs font-black uppercase tracking-widest text-gray-400">Categoría</span>
-                        <input name="category" value="{{ old('category') }}" class="mt-2 w-full rounded-3xl border border-blue-600/30 bg-black/80 px-4 py-3 text-white focus:border-blue-400 focus:outline-none">
+                        <select name="category" class="mt-2 w-full rounded-3xl border border-blue-600/30 bg-black/80 px-4 py-3 text-white focus:border-blue-400 focus:outline-none" required>
+                            <option value="">-- Selecciona una categoría --</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->name }}" {{ old('category') == $category->name ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </label>
                     <label class="block">
                         <span class="text-xs font-black uppercase tracking-widest text-gray-400">Etiqueta</span>
@@ -202,4 +216,27 @@
             </form>
         </div>
     </section>
+
+    <script>
+        // Obtener la tasa de cambio desde la API
+        async function updatePriceBs() {
+            try {
+                const response = await fetch('/api/settings/exchange-rate');
+                const data = await response.json();
+                const exchangeRate = data.exchange_rate || 1;
+                
+                document.querySelectorAll('.price-input').forEach(input => {
+                    input.addEventListener('change', function() {
+                        const priceUsd = parseFloat(this.value) || 0;
+                        const priceBs = (priceUsd * exchangeRate).toFixed(2);
+                        console.log(`$${priceUsd} USD = Bs ${priceBs}`);
+                    });
+                });
+            } catch (error) {
+                console.error('Error fetching exchange rate:', error);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', updatePriceBs);
+    </script>
 @endsection
