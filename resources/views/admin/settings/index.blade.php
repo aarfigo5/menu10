@@ -8,7 +8,7 @@
                 <h1 class="mt-3 text-4xl font-black uppercase tracking-tight text-white">Configuración del Sistema</h1>
                 <p class="mt-4 max-w-2xl text-sm leading-relaxed text-gray-300">Gestiona la tasa de cambio USD/BS, datos de contacto y configuración general.</p>
             </div>
-            <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-black uppercase tracking-widest text-white transition hover:bg-blue-700"
+            <a href="{{ route('admin.products.index') }}" class="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-black uppercase tracking-widest text-white transition hover:bg-blue-700">
                 ← Volver al Dashboard
             </a>
         </div>
@@ -82,7 +82,7 @@
                 <button type="submit" class="inline-flex items-center justify-center rounded-full bg-green-500 px-6 py-3 text-sm font-black uppercase tracking-widest text-black transition hover:bg-green-600">
                     ✅ Guardar Configuración
                 </button>
-                <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center justify-center rounded-full border border-blue-600/30 bg-black/70 px-6 py-3 text-sm font-black uppercase tracking-widest text-white transition hover:bg-black/50">
+                <a href="{{ route('admin.products.index') }}" class="inline-flex items-center justify-center rounded-full border border-blue-600/30 bg-black/70 px-6 py-3 text-sm font-black uppercase tracking-widest text-white transition hover:bg-black/50">
                     ← Cancelar
                 </a>
             </div>
