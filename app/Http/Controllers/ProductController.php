@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use App\Models\DeliveryZone;
 use Illuminate\Http\Request;
 
@@ -32,8 +33,9 @@ class ProductController extends Controller
         }
 
         $products = Product::orderBy('category')->get();
+        $categories = Category::orderBy('name')->get();
 
-        return view('admin.index', compact('products'));
+        return view('admin.index', compact('products', 'categories'));
     }
 
     public function show($id)
