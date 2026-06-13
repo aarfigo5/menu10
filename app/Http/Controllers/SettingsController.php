@@ -30,4 +30,13 @@ class SettingsController extends Controller
 
         return redirect()->back()->with('success', 'Configuración actualizada correctamente');
     }
+
+    public function getExchangeRate()
+    {
+        $exchangeRate = Settings::get('exchange_rate', 40.00);
+        
+        return response()->json([
+            'exchange_rate' => (float)$exchangeRate
+        ]);
+    }
 }
